@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Note Taker</title>
+  <!-- Latest compiled and minified CSS & JS -->
+  <link rel="stylesheet"
+    href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://code.jquery.com/jquery.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Note Taker</h1>
+            <a href="/add"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span>Add a Note</button></a>
+            <a href="/api/notes"><button class="btn btn-danger btn-lg"><span class="fa fa-plus"></span>All notes</button></a>
+        </div>
+
+        <div>
+            <input type="text" id="search" class="form-control">
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary btn-md" id="search-btn"><span class="fa fa-search"></span> 
+                    View Your Notes
+                </button>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body" id="view-notes">
+                <h2>Current Notes</h2>
+                <h3><strong>Note Name: </strong><span id="name"></span></h3>
+                <h4><strong>Note: </strong><span id="note"></span></h4>
+                <h5><strong>Date: </strong><span id="date"></span></h5>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $.get("/api/notes", function(notes) {
+            console.log(notes);
+            if (notes) {
+                $("#view-notes").show(notes);
+                $("#name").text(notes.name);
+                $("#note").text(notes.note);
+                $("#date").text(notes.date);
+            } else {
+                $("#name").text(
+                    "No notes submitted");
+                $("#view-notes").hide();
+            }
+        });
+    </script>  
+</body>
