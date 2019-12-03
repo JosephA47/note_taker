@@ -10,6 +10,7 @@ app.use(express.json());
   
 var notes = [
     {
+        routename: "newnote",
         name: "New Note",
         note: "Add Info",
         date: "MM/DD/YYYY"
@@ -43,9 +44,9 @@ app.get("/api/notes/:notes", function(req, res) {
     return res.json(false);
 });
   
-app.post("/add", function(req, res) {
+app.post("/api/notes", function(req, res) {
     var newNote = req.body;
-    newNote.name = newNote.note.replace(/\s+/g, "").toLowerCase();
+    newNote.routename = newNote.note.replace(/\s+/g, "").toLowerCase();
   
     console.log(newNote);
   

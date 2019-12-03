@@ -50,7 +50,7 @@
             date: $("#input-date").val().trim(),
         };
 
-        $.post("/", newNote)
+        $.post("/api/notes", newNote)
             .then(function(data) {
                console.log(data);
                alert("Note has been added");
